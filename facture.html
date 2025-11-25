@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture CMO_VISTAND</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 35px;
+            border-bottom: 4px solid #1a7f2e;
+            padding-bottom: 20px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #001f5c 0%, #1a7f2e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .clinic-info h1 {
+            color: #001f5c;
+            font-size: 26px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .clinic-info p {
+            color: #555;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-bottom: 2px;
+        }
+        
+        .clinic-info p strong {
+            color: #1a7f2e;
+        }
+        
+        .invoice-info {
+            text-align: right;
+            font-size: 12px;
+        }
+        
+        .invoice-info p {
+            margin-bottom: 6px;
+            color: #333;
+        }
+        
+        .invoice-info strong {
+            color: #001f5c;
+            font-size: 13px;
+        }
+        
+        .invoice-number {
+            background: linear-gradient(90deg, #001f5c, #1a7f2e);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+        
+        .parties {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .party {
+            font-size: 12px;
+        }
+        
+        .party-label {
+            font-weight: bold;
+            color: white;
+            background: #1a7f2e;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            border-radius: 3px;
+        }
+        
+        .party p {
+            margin-bottom: 4px;
+            color: #333;
+        }
+        
+        .party p strong {
+            color: #001f5c;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 12px;
+        }
+        
+        thead {
+            background: linear-gradient(90deg, #001f5c, #1a7f2e);
+            color: white;
+        }
+        
+        th {
+            padding: 13px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 11px 13px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:hover {
+            background: #f0f7f2;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-right {
+            text-align: right;
+        }
+        
+        .amount {
+            font-weight: 600;
+            color: #1a7f2e;
+        }
+        
+        .totals {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 30px;
+        }
+        
+        .totals-table {
+            width: 320px;
+        }
+        
+        .totals-table tr td {
+            padding: 10px 13px;
+            border: none;
+        }
+        
+        .totals-table tr td:first-child {
+            text-align: left;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .totals-table tr td:last-child {
+            text-align: right;
+            font-weight: 600;
+            color: #1a7f2e;
+        }
+        
+        .subtotal-row td {
+            border-bottom: 1px solid #ddd;
+            padding: 8px 13px;
+        }
+        
+        .tax-row td {
+            padding: 10px 13px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .total-row {
+            
+            color: white;
+        }
+        
+        .total-row td {
+            padding: 14px 13px;
+            font-size: 15px;
+           
+            
+        }
+        
+        .footer {
+            border-top: 2px solid #1a7f2e;
+            padding-top: 20px;
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+        }
+        
+        .notes {
+            background: linear-gradient(90deg, #f0f7f2, #f5f5f5);
+            padding: 14px;
+            border-left: 5px solid #1a7f2e;
+            margin-bottom: 20px;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+        
+        .notes strong {
+            color: #001f5c;
+        }
+        
+        .status-paid {
+            background: #1a7f2e;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 11px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête -->
+        <div class="header">
+            <div class="logo-section">
+                <img src="C:\Users\kdjan\Downloads\Facture\logo.jpg" alt="CMO_VISTAND Logo" style="width: 90px; height: 90px; object-fit: contain;">
+                <div class="clinic-info">
+                    <p><strong>Services Médicaux Professionnels</strong></p>
+                    <p>Adresse: Rue de la Santé, Accra, Ghana</p>
+                    <p>Tél: +225 XX XXX XXXX | Email: contact@cmovistand.com</p>
+                    <p>Licence Médicale: CM-2024-001234</p>
+                </div>
+            </div>
+            <div class="invoice-info">
+                <div class="invoice-number">FACTURE</div>
+                <p><strong>N°:</strong> FAC-CMO-2024-001</p>
+                <p><strong>Date:</strong> 15 Novembre 2024</p>
+                <p><strong>Échéance:</strong> 30 Novembre 2024</p>
+                <p><strong>Statut:</strong> <span class="status-paid">PAYÉE</span></p>
+            </div>
+        </div>
+        
+        <!-- Parties -->
+        <div class="parties">
+            <div class="party">
+                <div class="party-label">PRESTATAIRE</div>
+                <p><strong>Dr. Moustapha Diakite</strong></p>
+                <p>Médecin Généraliste</p>
+                <p>Spécialité: Cardiologue</p>
+                <p>Numéro d'Accréditation: ACC-2024-9876</p>
+            </div>
+            <div class="party">
+                <div class="party-label">PATIENT / CLIENT</div>
+                <p><strong>Ama Osei</strong></p>
+                <p>Adresse: 456 Avenue Principale, Accra</p>
+                <p>Tél: +225 XX XXX XXXX</p>
+                <p>Assurance: Couverture Maladie Universelle (CMU),</p>
+                <p>Police: POL-2024-98765</p>
+            </div>
+        </div>
+        
+        <!-- Tableau des services -->
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 45%;">Service / Acte Médical</th>
+                    <th class="text-center" style="width: 15%;">Quantité</th>
+                    <th class="text-right" style="width: 20%;">Prix Unitaire</th>
+                    <th class="text-right" style="width: 20%;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Consultation Médicale Générale</td>
+                    <td class="text-center">1</td>
+                    <td class="text-right">1500 FCFA</td>
+                    <td class="text-right amount">1500 FCFA</td>
+                </tr>
+                <tr>
+                    <td>Analyse Sang Complète (Hémogramme)</td>
+                    <td class="text-center">1</td>
+                    <td class="text-right">1500 FCFA</td>
+                    <td class="text-right amount">1500 FCFA</td>
+                </tr>
+                <tr>
+                    <td>Test Rapide COVID-19 (Antigène)</td>
+                    <td class="text-center">1</td>
+                    <td class="text-right">1500 FCFA</td>
+                    <td class="text-right amount">1500 FCFA</td>
+                </tr>
+                <tr>
+                    <td>Injection Thérapeutique (Vitamine C)</td>
+                    <td class="text-center">1</td>
+                    <td class="text-right">1500 FCFA</td>
+                    <td class="text-right amount">1500 FCFA</td>
+                </tr>
+                <tr>
+                    <td>Certificat Médical</td>
+                    <td class="text-center">1</td>
+                    <td class="text-right">1500 FCFA</td>
+                    <td class="text-right amount">1500 FCFA</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Notes -->
+        <div class="notes">
+            <strong>Remarques Importantes:</strong> Merci de votre confiance en CMO_VISTAND. 
+        </div>
+        
+        <!-- Totaux -->
+        <div class="totals">
+            <table class="totals-table">
+                <tr class="subtotal-row">
+                    <td>Sous-total</td>
+                    <td>3300 FCFA</td>
+                </tr>
+                <tr class="tax-row">
+                    <td>TVA (15%)</td>
+                    <td>1500 FCFA</td>
+                </tr>
+                <tr class="total-row">
+                    <td >MONTANT TOTAL</td>
+                    <td>38525 FCFA</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Pied de page -->
+        <div class="footer">
+            <p><strong>Moyens de Paiement:</strong> Espèces • Virement bancaire (Banque Cote d'ivoire Standard - Compte: 1234567890) • Cartes bancaires • Mobile Money</p>
+            
+            <p style="margin-top: 12px; color: #999; font-weight: 500;">© 2025 CMO_VISTAND - Votre Santé, Notre Priorité</p>
+        </div>
+    </div>
+</body>
+</html>
